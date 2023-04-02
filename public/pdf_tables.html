@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>NPO - PDF Extractor</title>
+</head>
+<body>
+<header>
+    <div class="navbar">
+        <div class="logo">
+            <a href="index.html">Nástroje pro organizaci</a>
+        </div>
+        <ul class="links">
+            <li>
+                <a href="index.html">DOMŮ</a>
+            </li>
+            <li>
+                <a href="contact.html">KONTAKT</a>
+            </li>
+        </ul>
+    </div>
+</header>
+<div class="text-box" id="text-box_pdf">
+    <h1>PDF Extractor</h1>
+</div>
+<div class="pdf-text">
+    <input type="file" id="inpFile">
+    <button type="button" id="btnUpload">Nahrát soubor</button>
+    <br>
+    <br>
+    <textarea name="" id="resultText" placeholder="Tady se po nahrání objeví tvoje PDF"></textarea>
+    <script>
+        const inpFile = document.getElementById('inpFile');
+        const btnUpload = document.getElementById('btnUpload');
+        const resultText = document.getElementById('resultText');
+
+        btnUpload.addEventListener('click', () => {
+            const formData = new FormData();
+
+            formData.append("pdfFile", inpFile.files[0]);
+
+            fetch("/extract-text", {
+                method: "post",
+                body: formData
+            }).then(response => {
+                return response.text();
+            }).then(extractedText => {
+                resultText.value = extractedText.trim();
+            });
+        });
+    </script>
+</div>
+<footer>
+    <p>© 2023 Adam Sucharda</p>
+</footer>
+
+</body>
+</html>
