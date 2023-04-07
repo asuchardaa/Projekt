@@ -7,58 +7,81 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;500;600;700&display=swap"
           rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <title>NPO - PDF Extractor</title>
 </head>
 <body>
-<header>
-    <div class="navbar">
-        <div class="logo">
-            <a href="index.html">Nástroje pro organizaci</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand text-uppercase fw-bold" href="index.html">Nástroje pro organizaci</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link fw-bold" href="index.html">DOMŮ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fw-bold" href="tools.html">O NÁSTROJÍCH</a>
+                </li>
+            </ul>
+            <a class="btn btn-primary ml-auto fw-bold" href="contact.html">Kontaktuj nás</a>
         </div>
-        <ul class="links">
-            <li>
-                <a href="index.html">DOMŮ</a>
-            </li>
-            <li>
-                <a href="contact.html">KONTAKT</a>
-            </li>
-        </ul>
     </div>
-</header>
-<div class="text-box" id="text-box_pdf">
-    <h1>PDF Extractor</h1>
-</div>
-<div class="pdf-text">
-    <input type="file" id="inpFile">
-    <button type="button" id="btnUpload">Nahrát soubor</button>
-    <br>
-    <br>
-    <textarea name="" id="resultText" placeholder="Tady se po nahrání objeví tvoje PDF"></textarea>
-    <script>
-        const inpFile = document.getElementById('inpFile');
-        const btnUpload = document.getElementById('btnUpload');
-        const resultText = document.getElementById('resultText');
+</nav>
+<div class="container text-center my-5">
+    <div class="text-box" id="text-box_pdf">
+        <h1 class="mb-4">PDF Extractor</h1>
+    </div>
+    <div class="pdf-text p-4">
+        <input type="file" id="inpFile" class="form-control mb-3">
+        <button type="button" id="btnUpload" class="btn btn-primary mb-3" disabled>Nahrát soubor</button>
+        <p class="text-danger d-none" id="fileError">Nejdříve musíš vybrat soubor k nahrání.</p>
+        <textarea name="" id="resultText" class="form-control" rows="25" placeholder="Tady se po nahrání objeví tvoje PDF"></textarea>
+        <script>
+            const inpFile = document.getElementById('inpFile');
+            const btnUpload = document.getElementById('btnUpload');
+            const resultText = document.getElementById('resultText');
+            const fileError = document.getElementById('fileError');
 
-        btnUpload.addEventListener('click', () => {
-            const formData = new FormData();
-
-            formData.append("pdfFile", inpFile.files[0]);
-
-            fetch("/extract-text", {
-                method: "post",
-                body: formData
-            }).then(response => {
-                return response.text();
-            }).then(extractedText => {
-                resultText.value = extractedText.trim();
+            inpFile.addEventListener('change', () => {
+                if (inpFile.files.length === 0) {
+                    btnUpload.disabled = true;
+                    fileError.classList.remove('d-none');
+                } else {
+                    btnUpload.disabled = false;
+                    fileError.classList.add('d-none');
+                }
             });
-        });
-    </script>
-</div>
-<footer>
-    <p>© 2023 Adam Sucharda</p>
-</footer>
 
+            btnUpload.addEventListener('click', () => {
+                const formData = new FormData();
+
+                formData.append("pdfFile", inpFile.files[0]);
+
+                fetch("/extract-text", {
+                    method: "post",
+                    body: formData
+                }).then(response => {
+                    return response.text();
+                }).then(extractedText => {
+                    resultText.value = extractedText.trim();
+                });
+            });
+        </script>
+    </div>
+</div>
+
+<footer class="bg-dark text-light py-3 position-fixed bottom-0 w-100">
+    <div class="container">
+        <p class="mb-0 text-center">Copyright &copy; 2023 | Made by Adam Sucharda</p>
+    </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>
