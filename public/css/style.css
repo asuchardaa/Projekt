@@ -4,3 +4,7 @@
 .card-text {
     overflow: auto;
 }
+
+.result-table {
+    margin-top: 2rem;
+}

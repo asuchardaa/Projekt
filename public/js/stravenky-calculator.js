@@ -3,7 +3,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Get the upload form and result table
     var form = document.getElementById('upload-form');
     var resultTable = document.getElementById('result-table');
+    var uploadBtn = document.querySelector('#upload-form button[type="submit"]');
 
+
+    document.getElementById("excel-file").addEventListener('change', function() {
+       if (this.files[0]) {
+           uploadBtn.disabled = false;
+       } else {
+           uploadBtn.disabled = true;
+       }
+    });
     // Handle form submit
     form.addEventListener('submit', function(event) {
         // Prevent default form behavior
@@ -41,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Function to process the workbook data and generate the result text
 // Function to process the workbook data and generate the result table
 function processWorkbook(workbook) {
     // Create a table element

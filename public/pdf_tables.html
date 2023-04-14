@@ -15,21 +15,23 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand text-uppercase fw-bold" href="index.html">Nástroje pro organizaci</a>
+        <a class="navbar-brand text-uppercase fw-bold ml-auto" href="index.html">Nástroje pro organizaci</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mx-auto">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link fw-bold" href="index.html">DOMŮ</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link fw-bold" href="tools.html">O NÁSTROJÍCH</a>
                 </li>
+                <li class="nav-item">
+                    <a class="btn btn-primary fw-bold" href="contact.html">KONTAKTUJ NÁS</a>
+                </li>
             </ul>
-            <a class="btn btn-primary ml-auto fw-bold" href="contact.html">Kontaktuj nás</a>
         </div>
     </div>
 </nav>
@@ -38,8 +40,8 @@
         <h1 class="mb-4">PDF Extractor</h1>
     </div>
     <div class="pdf-text p-4">
-        <input type="file" id="inpFile" class="form-control mb-3">
-        <button type="button" id="btnUpload" class="btn btn-primary mb-3" disabled>Nahrát soubor</button>
+        <input type="file" id="inpFile" class="form-control mb-4" accept=".pdf">
+        <button type="button" id="btnUpload" class="btn btn-primary mb-4" disabled>Nahrát soubor</button>
         <p class="text-danger d-none" id="fileError">Nejdříve musíš vybrat soubor k nahrání.</p>
         <textarea name="" id="resultText" class="form-control" rows="25"
                   placeholder="Tady se po nahrání objeví tvoje PDF"></textarea>

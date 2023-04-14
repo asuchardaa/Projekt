@@ -15,35 +15,40 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand text-uppercase fw-bold mr-auto" href="index.html">Nástroje pro organizaci</a>
+        <a class="navbar-brand text-uppercase fw-bold ml-auto" href="index.html">Nástroje pro organizaci</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mx-auto">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link fw-bold" href="index.html">DOMŮ</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link fw-bold" href="tools.html">O NÁSTROJÍCH</a>
                 </li>
+                <li class="nav-item">
+                    <a class="btn btn-primary fw-bold" href="contact.html">KONTAKTUJ NÁS</a>
+                </li>
             </ul>
-            <a class="btn btn-primary ml-auto fw-bold" href="contact.html">Kontaktuj nás</a>
         </div>
     </div>
 </nav>
+
 <div class="container text-center my-5">
-    <h1 class="text-center mt-4">Výpočet nároku na stravenky</h1>
+    <div class="text-box">
+        <h1 class="text-center mb-4">Výpočet nároku na stravenky</h1>
+    </div>
     <div class="stravenky-counter p-4">
         <form id="upload-form">
             <div class="form-group">
-                <input type="file" class="form-control-file" id="excel-file" name="excel-file">
+                <input type="file" class="form-control mb-4" id="excel-file" name="excel-file" accept=".xlsx">
             </div>
-            <button type="submit" class="btn btn-primary">Nahrát soubor</button>
+            <button type="submit" class="btn btn-primary" disabled>Nahrát soubor</button>
         </form>
         <p class="text-danger d-none" id="file-error">Nejdříve musíš vybrat soubor k nahrání.</p>
-        <div id="result-table"></div>
+        <div id="result-table" class="result-table"></div>
         <script src="js/stravenky-calculator.js"></script>
     </div>
 </div>
@@ -53,7 +58,9 @@
         <p class="mb-0 text-center">Copyright &copy; 2023 | Made by Adam Sucharda</p>
     </div>
 </footer>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.8/xlsx.full.min.js" integrity="NerWxp37F9TtBS1k1cr2TjyC9c8Qh6ghgqVBOYXaahgnBkVT6a8KVbO05Z8+LnIIom4CJSSQTZ3VbL396scK5w==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.8/xlsx.full.min.js"
+        integrity="NerWxp37F9TtBS1k1cr2TjyC9c8Qh6ghgqVBOYXaahgnBkVT6a8KVbO05Z8+LnIIom4CJSSQTZ3VbL396scK5w=="
+        crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
