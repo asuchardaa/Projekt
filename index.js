@@ -8,16 +8,21 @@ app.use("/", express.static('public'));
 app.use(fileUpload());
 
 app.post("/extract-text", (req, res) => {
-   if (!req.files && !req.files.pdfFile) {
-       res.status(400);
-       res.end();
-   }
+    if (!req.files && !req.files.pdfFile) {
+        res.status(400);
+        res.end();
+        return;
+    }
 
-   pdfParse(req.files.pdfFile).then(result => {
-       res.send(result.text);
-   });
+    pdfParse(req.files.pdfFile.data).then(result => {
+        res.send(result.text);
+    });
 });
 
-app.listen(3000, () => {
-    console.log("Server started on port 3000");
-});
+try {
+    app.listen(3000, () => {
+        console.log("Server started on port 3000");
+    });
+} catch (error) {
+    console.error("Failed to start server:", error);
+}
