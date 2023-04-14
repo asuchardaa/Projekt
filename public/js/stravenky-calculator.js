@@ -1,8 +1,8 @@
 // Wait for the DOM to load
 document.addEventListener('DOMContentLoaded', function() {
-    // Get the upload form and result textarea
+    // Get the upload form and result table
     var form = document.getElementById('upload-form');
-    var resultTextArea = document.getElementById('result-text');
+    var resultTable = document.getElementById('result-table');
 
     // Handle form submit
     form.addEventListener('submit', function(event) {
@@ -31,20 +31,31 @@ document.addEventListener('DOMContentLoaded', function() {
             var data = event.target.result;
             var workbook = XLSX.read(data, {type: 'binary'});
 
-            // Process the data and generate the result text
-            var result = processWorkbook(workbook);
+            // Process the data and generate the result table
+            var table = processWorkbook(workbook);
 
-            // Set the result text in the textarea
-            resultTextArea.value = result;
+            // Set the result table in the div
+            resultTable.innerHTML = '';
+            resultTable.appendChild(table);
         };
     });
 });
 
 // Function to process the workbook data and generate the result text
+// Function to process the workbook data and generate the result table
 function processWorkbook(workbook) {
-    var result = '';
-    result += 'Jméno | příjmení | počet hodin | nárok na stravenky\n';
-    result += '---------------------------------------------------------\n';
+    // Create a table element
+    var table = document.createElement('table');
+    table.classList.add('table');
+
+    // Create a table header row
+    var headerRow = table.insertRow();
+    var headers = ['Jméno', 'Příjmení', 'Počet hodin', 'Nárok na stravenky'];
+    for (var i = 0; i < headers.length; i++) {
+        var headerCell = document.createElement('th');
+        headerCell.innerText = headers[i];
+        headerRow.appendChild(headerCell);
+    }
 
     // Loop through each sheet in the workbook
     workbook.SheetNames.forEach(function(sheetName) {
@@ -62,21 +73,22 @@ function processWorkbook(workbook) {
                 entitled = true;
             }
 
-            // Add the employee's information and entitlement to the result text
-            result += row['Jméno'] + ' ' + row['Příjmení'] + ': ';
-            result += row['Počet hodin'] + ' hodin';
+            // Create a table row for the employee data
+            var dataRow = table.insertRow();
+            var nameCell = dataRow.insertCell();
+            nameCell.innerText = row['Jméno'];
+            var surnameCell = dataRow.insertCell();
+            surnameCell.innerText = row['Příjmení'];
+            var hoursCell = dataRow.insertCell();
+            hoursCell.innerText = row['Počet hodin'];
+            var entitledCell = dataRow.insertCell();
             if (entitled) {
-                result += ' - nárok na stravenky';
+                entitledCell.innerText = 'Ano';
             } else {
-                result += ' - bez nároku na stravenky';
+                entitledCell.innerText = 'Ne';
             }
-            result += '\n';
         });
     });
 
-    return result;
+    return table;
 }
-
-
-
-
