@@ -58,45 +58,65 @@ function processWorkbook(workbook) {
 
     // Create a table header row
     var headerRow = table.insertRow();
-    var headers = ['Jméno', 'Příjmení', 'Počet hodin', 'Nárok na stravenky'];
+    var headers = ['Jméno', 'Příjmení', 'Počet hodin v práci', 'Počet stravenek'];
     for (var i = 0; i < headers.length; i++) {
         var headerCell = document.createElement('th');
         headerCell.innerText = headers[i];
         headerRow.appendChild(headerCell);
     }
 
-    // Loop through each sheet in the workbook
-    workbook.SheetNames.forEach(function(sheetName) {
-        // Get the sheet data
-        var sheet = workbook.Sheets[sheetName];
+    // Get the sheet data
+    var sheet = workbook.Sheets[workbook.SheetNames[0]];
 
-        // Convert the sheet data to JSON format
-        var jsonSheetData = XLSX.utils.sheet_to_json(sheet);
+    // Convert the sheet data to JSON format
+    var jsonSheetData = XLSX.utils.sheet_to_json(sheet);
 
-        // Loop through each row in the sheet data
-        jsonSheetData.forEach(function(row) {
-            // Check if the employee is entitled to meal vouchers
-            var entitled = false;
-            if (row['Počet hodin'] >= 7) {
-                entitled = true;
+    // Create an object to store the total number of hours worked and meal vouchers
+    var employeeData = {};
+
+    // Loop through each row in the sheet data
+    jsonSheetData.forEach(function(row) {
+        // Check if the row corresponds to a working day with meal vouchers
+        if ((row['Typ'] === 'SC' || row['Typ'] === 'P') && row['Příchod'] && row['Odchod']) {
+            // Get the employee's name and surname
+            var name = row['Jméno'];
+            var surname = row['Příjmení'];
+
+            // Calculate the number of hours worked
+            var hoursWorked = row['Odchod'] - row['Příchod'];
+
+            // Add the number of hours worked to the employee's total
+            if (!employeeData[name + ' ' + surname]) {
+                employeeData[name + ' ' + surname] = {
+                    hoursWorked: 0,
+                    mealVouchers: 0
+                };
             }
+            employeeData[name + ' ' + surname].hoursWorked += hoursWorked;
 
-            // Create a table row for the employee data
-            var dataRow = table.insertRow();
-            var nameCell = dataRow.insertCell();
-            nameCell.innerText = row['Jméno'];
-            var surnameCell = dataRow.insertCell();
-            surnameCell.innerText = row['Příjmení'];
-            var hoursCell = dataRow.insertCell();
-            hoursCell.innerText = row['Počet hodin'];
-            var entitledCell = dataRow.insertCell();
-            if (entitled) {
-                entitledCell.innerText = 'Ano';
-            } else {
-                entitledCell.innerText = 'Ne';
+            // Check if the employee is entitled to a meal voucher
+            if (hoursWorked >= 7) {
+                employeeData[name + ' ' + surname].mealVouchers += 1;
             }
-        });
+        }
     });
 
-    return table;
+    // Loop through the employee data and create a table row for each employee
+    Object.keys(employeeData).forEach(function(key) {
+        var dataRow = table.insertRow();
+        var nameCell = dataRow.insertCell();
+        var nameParts = key.split(' ');
+        nameCell.innerText = nameParts[0];
+        var surnameCell = dataRow.insertCell();
+        surnameCell.innerText = nameParts[1];
+        var hoursWorkedCell = dataRow.insertCell();
+        hoursWorkedCell.innerText = employeeData[key].hoursWorked;
+        var mealVouchersCell = dataRow.insertCell();
+        mealVouchersCell.innerText = employeeData[key].mealVouchers;
+    });
+
+    // Add the table to the HTML document
+    document.body.appendChild(table);
 }
+
+
