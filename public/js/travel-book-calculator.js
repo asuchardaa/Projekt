@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
         totalLabelCell.colSpan = 1;
         var totalMoneyCell = totalRow.insertCell();
         totalMoneyCell.classList.add('table-total-value');
-        totalMoneyCell.innerText = celkemPenezProplatit + ' Kč';
+        totalMoneyCell.innerText = celkemPenezProplatit.toFixed(2) + ' Kč';
         totalMoneyCell.style.fontWeight = 'bold';
 
         return tableTravelBook;
