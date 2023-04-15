@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Loop through each row in the sheet data
             jsonSheetData.forEach(function(row) {
                 // Check if the row corresponds to a working day with meal vouchers
-                if ((row['Typ'] === 'SC' || row['Typ'] === 'P') && row['Příchod'] && row['Odchod']) {
+                if ((row['Typ'] === 'P') && row['Příchod'] && row['Odchod']) {
                     // Get the employee's name and surname
                     var name = row['Jméno'];
                     var surname = row['Příjmení'];
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     employeeData[name + ' ' + surname].hoursWorked += hoursWorked;
 
                     // Check if the employee is entitled to a meal voucher
-                    if (hoursWorked >= 7) {
+                    if (hoursWorked >= 5) {
                         employeeData[name + ' ' + surname].mealVouchers += 1;
                     }
                 }
