@@ -21,6 +21,11 @@
     margin-top: 50px;
 }
 
+.contact-form input,
+.contact-form textarea {
+    margin-bottom: 25px;
+}
+
 .map {
     position: relative;
     padding-bottom: 56.25%;
