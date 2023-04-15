@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Create an object to store the total number of hours worked and meal vouchers
         var employeeData = {};
+        var celkemStravenek = 0;
 
         // Loop through each sheet in the workbook
         workbook.SheetNames.forEach(function(sheetName) {
@@ -98,6 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Check if the employee is entitled to a meal voucher
                     if (hoursWorked >= 5) {
                         employeeData[name + ' ' + surname].mealVouchers += 1;
+                        celkemStravenek += 1;
                     }
                 }
             });
@@ -116,6 +118,21 @@ document.addEventListener('DOMContentLoaded', function() {
             var mealVouchersCell = dataRow.insertCell();
             mealVouchersCell.innerText = employeeData[key].mealVouchers;
         });
+
+        var totalRow = table.insertRow();
+        totalRow.classList.add('table-total');
+        var totalLabelCell = totalRow.insertCell();
+        totalLabelCell.classList.add('table-total-label');
+        totalLabelCell.innerText = 'Celkem stravenek:';
+        // totalLabelCell.style.fontWeight = 'bold';
+        // totalLabelCell.style.textAlign = 'left';
+        var spacerCell1 = totalRow.insertCell();
+        var spacerCell2 = totalRow.insertCell();
+        totalLabelCell.colSpan = 1;
+        var totalMealVouchersCell = totalRow.insertCell();
+        totalMealVouchersCell.classList.add('table-total-value');
+        totalMealVouchersCell.innerText = celkemStravenek;
+        totalMealVouchersCell.style.fontWeight = 'bold';
 
         return table;
     }
