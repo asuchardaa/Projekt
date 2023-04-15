@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Create a table header row
         var headerRow = tableTravelBook.insertRow();
-        var headersTravelBook = ['Jméno', 'Příjmení', 'Počet hodin na cestách', 'Počet najetých km', 'Proplatit'];
+        var headersTravelBook = ['Jméno', 'Příjmení', 'Počet hodin na cestách', 'Proplatit'];
         for (var i = 0; i < headersTravelBook.length; i++) {
             var headerCell = document.createElement('th');
             headerCell.innerText = headersTravelBook[i];
@@ -77,13 +77,19 @@ document.addEventListener('DOMContentLoaded', function () {
             // Loop through each row in the sheet data
             jsonSheetData.forEach(function (row) {
                 // Check if the row corresponds to a working day with meal vouchers
-                if ((row['Typ'] === 'SC') && row['Příchod'] && row['Odchod'] && row['Km']) {
+                if ((row['Typ'] === 'SC') && row['Příchod'] && row['Odchod']) {
                     // Get the employee's name and surname
                     var name = row['Jméno'];
                     var surname = row['Příjmení'];
                     var hoursOnTheRoads = row['Odchod'] - row['Příchod'];
-                    var kmDrivenInTotal = row['Km'];
-                    var moneyToPayTotal = kmDrivenInTotal * 5.2;
+                    var moneyToPayTotal;
+                    if (hoursOnTheRoads >= 5 && hoursOnTheRoads <= 12) {
+                        moneyToPayTotal =  150;
+                    } else if (hoursOnTheRoads > 12 && hoursOnTheRoads <= 18) {
+                        moneyToPayTotal = 220;
+                    } else {
+                        moneyToPayTotal = 360;
+                    }
 
                     // Add the number of hours worked to the employee's total
                     if (!employeeData[name + ' ' + surname]) {
@@ -94,7 +100,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         };
                     }
                     employeeData[name + ' ' + surname].hoursWorked += hoursOnTheRoads;
-                    employeeData[name + ' ' + surname].kmDriven += kmDrivenInTotal;
                     employeeData[name + ' ' + surname].moneyToPay += moneyToPayTotal;
                     celkemPenezProplatit += moneyToPayTotal;
                 }
@@ -111,8 +116,6 @@ document.addEventListener('DOMContentLoaded', function () {
             surnameCell.innerText = nameParts[1];
             var hoursTravelledCell = dataRow.insertCell();
             hoursTravelledCell.innerText = employeeData[key].hoursWorked;
-            var kmDrivenCell = dataRow.insertCell();
-            kmDrivenCell.innerText = employeeData[key].kmDriven;
             var moneyToPayCell = dataRow.insertCell();
             moneyToPayCell.innerText = employeeData[key].moneyToPay.toFixed(2) + ' Kč';
         });
@@ -124,7 +127,6 @@ document.addEventListener('DOMContentLoaded', function () {
         totalLabelCell.innerText = 'Celkem proplatit:';
         var spacerCell1 = totalRow.insertCell();
         var spacerCell2 = totalRow.insertCell();
-        var spacerCell3 = totalRow.insertCell();
         totalLabelCell.colSpan = 1;
         var totalMoneyCell = totalRow.insertCell();
         totalMoneyCell.classList.add('table-total-value');
