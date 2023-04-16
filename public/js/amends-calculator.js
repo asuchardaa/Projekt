@@ -39,13 +39,13 @@ $(document).ready(function () {
         } else {
             switch (fuelType) {
                 case 'natural95':
-                    fuelPrice = 31.50;
+                    fuelPrice = 41.20;
                     break;
                 case 'natural98':
-                    fuelPrice = 32.50;
+                    fuelPrice = 45.20;
                     break;
                 case 'diesel':
-                    fuelPrice = 30.00;
+                    fuelPrice = 44.10;
                     break;
                 case 'electric':
                     fuelPrice = 6.00;
@@ -71,10 +71,11 @@ $(document).ready(function () {
             var totalCost = fuelCost + wearAndTearPrice;
 
             var table = '<table class="table table-bordered">';
-            table += '<tr><td><b>Cestovní náklady celkem:</b></td><td><strong>' + totalCost.toFixed(2) + ' Kč</strong></td></tr>';
-            table += '<tr><td>Cestovní náklady: pohonné hmoty</td><td>' + fuelCost.toFixed(2) + ' Kč</td></tr>';
-            table += '<tr><td>Cestovní náklady: opotřebení automobilu</td><td>' + wearAndTearPrice.toFixed(2) + ' Kč</td></tr>';
+            table += '<tr><td><b>Cestovní náklady celkem:</b></td><td><strong>' + totalCost.toFixed(0) + ' Kč</strong></td></tr>';
+            table += '<tr><td>Cestovní náklady: pohonné hmoty</td><td>' + fuelCost.toFixed(0) + ' Kč</td></tr>';
+            table += '<tr><td >Cestovní náklady: opotřebení automobilu</td><td>' + wearAndTearPrice.toFixed(0) + ' Kč</td></tr>';
             table += '</table>';
+            table += '<p style="text-align: right;">Celkové částky jsou zaokrouhlené na koruny dolů.</p>'
 
             $('#result').html(table);
         }

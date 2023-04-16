@@ -41,6 +41,29 @@
     <div class="d-flex justify-content-center align-items-center" style="height: 50vh;">
         <div class="container my-5">
             <h1 class="text-center mb-4">Kalkulačka cestovních náhrad</h1>
+            <div class="modal fade" id="gasPricesModal" tabindex="-1" aria-labelledby="gasPricesModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="gasPricesModalLabel">Current Gas Prices</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Current gas prices for the selected fuel type:</p>
+                            <ul>
+                                <li>Natural 95: 28 Kč/l</li>
+                                <li>Natural 98: 30 Kč/l</li>
+                                <li>Nafta: 32 Kč/l</li>
+                                <li>Elektro: 12 Kč/kWh</li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <form id="calculator">
                 <div class="form-group row my-4">
                     <label for="distance" class="col-sm-3 col-form-label">Počet najetých kilometrů</label>
@@ -53,20 +76,22 @@
                     <label for="fuelPriceCheck" class="col-sm-3 col-form-label">Doložená cena pohonných hmot</label>
                     <div class="col-sm-8">
                         <select class="form-control form-select" id="fuelPriceCheck">
-                            <option value="no">NE</option>
-                            <option value="yes">ANO</option>
+                            <option value="no">Ne</option>
+                            <option value="yes">Ano</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group row my-4" id="fuelTypeWrapper">
                     <label for="fuelType" class="col-sm-3 col-form-label">Druh pohonných hmot</label>
                     <div class="col-sm-8">
-                        <select class="form-control form-select" id="fuelType">
-                            <option value="natural95">Natural 95</option>
-                            <option value="natural98">Natural 98</option>
-                            <option value="diesel">Nafta</option>
-                            <option value="electric">Elektro</option>
-                        </select>
+                        <div class="input-group">
+                            <select class="form-control form-select" id="fuelType">
+                                <option value="natural95">Natural 95</option>
+                                <option value="natural98">Natural 98</option>
+                                <option value="diesel">Nafta</option>
+                                <option value="electric">Elektro</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group row my-4" id="fuelPriceWrapper" style="display:none;">
@@ -86,6 +111,8 @@
                 <div class="form-group row my-4">
                     <div class="col-sm-12 text-center">
                         <button type="submit" class="btn btn-primary">Vypočítat</button>
+                        <button class="btn btn-primary btnprimary2" type="button" data-bs-toggle="modal"
+                                data-bs-target="#gasPricesModal"><span class="text-white">I</span></button>
                         <div id="error-container" class="error"></div>
                     </div>
                 </div>
@@ -125,6 +152,7 @@
 </footer>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>

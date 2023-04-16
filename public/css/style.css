@@ -46,3 +46,24 @@
     font-weight: bold;
     color: red;
 }
+
+.btnprimary2 {
+    color: #000;
+    background-color: #000;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    margin-left: 20px;
+    border: none;
+}
+
+.btnprimary2:hover {
+    color: #000;
+}
+
+/*.button-center-box {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*}*/
