@@ -46,16 +46,25 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="gasPricesModalLabel">Current Gas Prices</h5>
+                            <h4 class="modal-title" id="gasPricesModalLabel" style="font-weight: bold;">Princip
+                                kalkulačky cestovních náhrad</h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <p>Current gas prices for the selected fuel type:</p>
+                            <p><b>Sazba základní náhrady za 1 km jízdy</b> podle § 157 odst. 4 zákoníku práce
+                                <b>činí:</b></p>
                             <ul>
-                                <li>Natural 95: 28 Kč/l</li>
-                                <li>Natural 98: 30 Kč/l</li>
-                                <li>Nafta: 32 Kč/l</li>
-                                <li>Elektro: 12 Kč/kWh</li>
+                                <li>Jednostopá vozidla a tříkolky: <b>1,40 Kč</b></li>
+                                <li>Osobní silniční motorová vozidla: <b>5,20 Kč</b></li>
+                            </ul>
+                            <hr>
+                            <p><b>Výše průměrné ceny za 1 litr pohonné hmoty</b> podle § 158 odst. 3 věty třetí zákoníku
+                                práce <b>činí:</b></p>
+                            <ul>
+                                <li>Natural 95: <b>41,20 Kč/l</b></li>
+                                <li>Natural 98: <b>45,20 Kč/l</b></li>
+                                <li>Nafta: <b>44,10 Kč/l</b></li>
+                                <li>Elektro: <b>8,20 Kč/kWh</b></li>
                             </ul>
                         </div>
                         <div class="modal-footer">
@@ -110,9 +119,10 @@
                 </div>
                 <div class="form-group row my-4">
                     <div class="col-sm-12 text-center">
-                        <button type="submit" class="btn btn-primary">Vypočítat</button>
+                        <button type="submit" class="btn btn-primary" style="font-weight: bold;">Vypočítat</button>
                         <button class="btn btn-primary btnprimary2" type="button" data-bs-toggle="modal"
-                                data-bs-target="#gasPricesModal"><span class="text-white">I</span></button>
+                                data-bs-target="#gasPricesModal"><span class="text-white"
+                                                                       style="font-weight: bold;">?</span></button>
                         <div id="error-container" class="error"></div>
                     </div>
                 </div>

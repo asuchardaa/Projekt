@@ -48,7 +48,7 @@ $(document).ready(function () {
                     fuelPrice = 44.10;
                     break;
                 case 'electric':
-                    fuelPrice = 6.00;
+                    fuelPrice = 8.20;
                     break;
                 default:
                     errorMessageText += '<p>Zadejte platný druh paliva!</p>';
@@ -73,7 +73,7 @@ $(document).ready(function () {
             var table = '<table class="table table-bordered">';
             table += '<tr><td><b>Cestovní náklady celkem:</b></td><td><strong>' + totalCost.toFixed(0) + ' Kč</strong></td></tr>';
             table += '<tr><td>Cestovní náklady: pohonné hmoty</td><td>' + fuelCost.toFixed(0) + ' Kč</td></tr>';
-            table += '<tr><td >Cestovní náklady: opotřebení automobilu</td><td>' + wearAndTearPrice.toFixed(0) + ' Kč</td></tr>';
+            table += '<tr><td>Cestovní náklady: opotřebení automobilu</td><td>' + wearAndTearPrice.toFixed(0) + ' Kč</td></tr>';
             table += '</table>';
             table += '<p style="text-align: right;">Celkové částky jsou zaokrouhlené na koruny dolů.</p>'
 
