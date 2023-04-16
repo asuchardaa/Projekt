@@ -84,11 +84,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     var hoursOnTheRoads = row['Odchod'] - row['Příchod'];
                     var moneyToPayTotal;
                     if (hoursOnTheRoads >= 5 && hoursOnTheRoads <= 12) {
-                        moneyToPayTotal =  150;
+                        moneyToPayTotal =  129;
                     } else if (hoursOnTheRoads > 12 && hoursOnTheRoads <= 18) {
-                        moneyToPayTotal = 220;
+                        moneyToPayTotal = 196;
                     } else {
-                        moneyToPayTotal = 360;
+                        moneyToPayTotal = 307;
                     }
 
                     // Add the number of hours worked to the employee's total
