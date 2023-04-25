@@ -1,12 +1,10 @@
 $(document).ready(function () {
-    // cache elements for better performance
     var $calculator = $('#calculator');
     var $fuelPriceCheck = $('#fuelPriceCheck');
     var $fuelTypeWrapper = $('#fuelTypeWrapper');
     var $fuelPriceWrapper = $('#fuelPriceWrapper');
     var $errorMessage = $('#error-container');
 
-    // add event listener to fuelPriceCheck select
     $fuelPriceCheck.on('change', function () {
         if ($(this).val() === 'yes') {
             $fuelTypeWrapper.hide();
@@ -17,7 +15,6 @@ $(document).ready(function () {
         }
     });
 
-    // add submit event listener to calculator form
     $calculator.submit(function (event) {
         event.preventDefault();
         var distance = parseFloat($('#distance').val());
