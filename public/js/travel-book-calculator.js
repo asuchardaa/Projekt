@@ -11,16 +11,17 @@ document.addEventListener('DOMContentLoaded', function () {
             uploadBtnTravelBook.disabled = true;
         }
     });
+
     formTravelBook.addEventListener('submit', function (event) {
         event.preventDefault();
-
         var file = document.getElementById('excel-file-travel-book').files[0];
+
         if (!file) {
             document.getElementById('file-error').classList.remove('d-none');
             return;
         }
-        document.getElementById('file-error').classList.add('d-none');
 
+        document.getElementById('file-error').classList.add('d-none');
         var reader = new FileReader();
         reader.readAsBinaryString(file);
         reader.onload = function (event) {
@@ -42,6 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
             headerCell.innerText = headersTravelBook[i];
             headerRow.appendChild(headerCell);
         }
+
         var employeeData = {};
         var celkemPenezProplatit = 0;
         workbook.SheetNames.forEach(function (sheetName) {
@@ -54,12 +56,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     var hoursOnTheRoads = row['Odchod'] - row['Příchod'];
                     var moneyToPayTotal;
                     if (hoursOnTheRoads >= 5 && hoursOnTheRoads <= 12) {
-                        moneyToPayTotal =  129;
+                        moneyToPayTotal = 129;
                     } else if (hoursOnTheRoads > 12 && hoursOnTheRoads <= 18) {
                         moneyToPayTotal = 196;
                     } else {
                         moneyToPayTotal = 307;
                     }
+
                     if (!employeeData[name + ' ' + surname]) {
                         employeeData[name + ' ' + surname] = {
                             hoursWorked: 0,
@@ -73,6 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         });
+
         Object.keys(employeeData).forEach(function (key) {
             var dataRow = tableTravelBook.insertRow();
             var nameCell = dataRow.insertCell();
