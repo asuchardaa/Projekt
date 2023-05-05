@@ -1,7 +1,9 @@
 # Projekt
+Webová stránka, která umožňuje na jedné stránce zaměstnanci, který se stará 
+o vyplacení stravenek či cestovních náhrad přehledný a rychlý přístup k nástrojům, které mohou sloužít k rychlejší denodenní práci v organizaci.
 ## Seznam nástrojů
 
-1.[x] Extrahování textu z PDF souboru
-2.[x] Výpočet stravenek dle zaměstnancovi docházky
-3.[x] Výpočet stravného za služební cesty zaměstnanců
-4.[x] Kalkulačka cestovních náhrad za služební cesty zaměstnance
+- [x] Extrahování textu z PDF souboru
+- [x] Výpočet stravenek dle zaměstnancovi docházky
+- [x] Výpočet stravného za služební cesty zaměstnanců
+- [x] Kalkulačka cestovních náhrad za služební cesty zaměstnance
