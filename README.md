@@ -1,6 +1,7 @@
 # Projekt
-Webová stránka, která umožňuje na jedné stránce zaměstnanci, který se stará 
-o vyplacení stravenek či cestovních náhrad přehledný a rychlý přístup k nástrojům, které mohou sloužít k rychlejší denodenní práci v organizaci.
+- CZ: Efektivní webová stránka se 4 nástroji, které zjednoduší práci zaměstnancům v účetním oddělení.
+- EN: An effective website with 4 tools that will simplify the work of employees in the accounting department.
+
 ## Seznam nástrojů
 
 - [x] Extrahování textu z PDF souboru
